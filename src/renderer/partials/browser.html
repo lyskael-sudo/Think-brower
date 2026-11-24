@@ -1,0 +1,94 @@
+<!-- Contenu --------------------------------------------------------- -->
+<main class="browser-area">
+  <div id="find-bar" class="find-bar" role="search" hidden>
+    <label class="visually-hidden" for="find-input">
+      Rechercher dans la page
+    </label>
+    <input
+      id="find-input"
+      class="find-bar__input"
+      type="text"
+      placeholder="Rechercher dans la page…"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <span id="find-count" class="find-bar__count" aria-live="polite"></span>
+    <button
+      id="find-previous"
+      class="icon-button find-bar__button"
+      type="button"
+      title="Correspondance précédente (Maj+Entrée)"
+      aria-label="Correspondance précédente"
+    >
+      <span aria-hidden="true">↑</span>
+    </button>
+    <button
+      id="find-next"
+      class="icon-button find-bar__button"
+      type="button"
+      title="Correspondance suivante (Entrée)"
+      aria-label="Correspondance suivante"
+    >
+      <span aria-hidden="true">↓</span>
+    </button>
+    <button
+      id="find-close"
+      class="icon-button find-bar__button"
+      type="button"
+      title="Fermer la recherche (Échap)"
+      aria-label="Fermer la recherche"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+
+  <div id="webview-stack" class="webview-stack"></div>
+
+  <aside
+    id="media-panel"
+    class="media-panel"
+    aria-labelledby="media-panel-title"
+    hidden
+  >
+    <header class="media-panel__header">
+      <div>
+        <p class="eyebrow">Activité réseau</p>
+        <h2 id="media-panel-title">Médias détectés</h2>
+        <p class="media-panel__description">
+          Fichiers directs et flux HLS/DASH repérés sur les pages visitées.
+          Les contenus protégés par DRM ne sont pas pris en charge.
+        </p>
+      </div>
+      <div class="media-panel__header-actions">
+        <button
+          id="media-extract"
+          class="button button--ghost button--small"
+          type="button"
+          title="Chercher les médias présents dans la page active"
+        >
+          Analyser la page
+        </button>
+        <button
+          id="media-panel-close"
+          class="icon-button media-panel__close"
+          type="button"
+          aria-label="Fermer la liste des médias"
+          title="Fermer"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+    </header>
+
+    <ul id="media-list" class="media-list"></ul>
+
+    <p
+      id="media-tool-status"
+      class="media-panel__status"
+      role="status"
+      hidden
+    ></p>
+  </aside>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</main>

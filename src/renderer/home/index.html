@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action https: http:;"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Nouvel onglet</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
+    <div class="glow glow--one" aria-hidden="true"></div>
+    <div class="glow glow--two" aria-hidden="true"></div>
+
+    <main class="home">
+      <header class="home__top">
+        <div class="brand" aria-label="Think-Browser">
+          <img src="logo.svg" alt="" width="30" height="33" />
+          <span>Think-Browser</span>
+        </div>
+        <div class="clock" aria-label="Heure et date">
+          <strong id="clock-time">—</strong>
+          <span id="clock-date">—</span>
+        </div>
+      </header>
+
+      <section class="hero" aria-labelledby="welcome-title">
+        <p class="hero__eyebrow">Votre page d’accueil</p>
+        <h1 id="welcome-title"><span id="greeting">Bonjour</span>.</h1>
+        <p class="hero__lead">
+          Un point de départ calme pour chercher, apprendre et reprendre votre
+          navigation là où vous l’avez laissée.
+        </p>
+
+        <form
+          id="home-search-form"
+          class="home-search"
+          action="https://www.google.com/search"
+          method="get"
+          role="search"
+        >
+          <svg
+            class="home-search__icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="6.5" />
+            <path d="m16 16 4.2 4.2" />
+          </svg>
+          <label class="visually-hidden" for="home-search-input">
+            Rechercher sur le Web
+          </label>
+          <input
+            id="home-search-input"
+            name="q"
+            type="search"
+            placeholder="Rechercher sur Google…"
+            autocomplete="off"
+            spellcheck="false"
+            autofocus
+          />
+          <button type="submit">Rechercher</button>
+        </form>
+
+        <p class="hero__engine">
+          Moteur actif :
+          <strong id="engine-label">Google</strong>
+          <span aria-hidden="true">·</span>
+          modifiable dans les paramètres
+        </p>
+      </section>
+
+      <section class="shortcuts" aria-labelledby="shortcuts-title">
+        <div class="shortcuts__header">
+          <h2 id="shortcuts-title">Raccourcis</h2>
+          <span>Quelques destinations utiles</span>
+        </div>
+        <nav class="shortcut-grid" aria-label="Sites fréquents">
+          <a class="shortcut" href="https://github.com/">
+            <span class="shortcut__mark shortcut__mark--github">GH</span>
+            <span class="shortcut__text">
+              <strong>GitHub</strong>
+              <small>Code et projets</small>
+            </span>
+          </a>
+          <a class="shortcut" href="https://www.youtube.com/">
+            <span class="shortcut__mark shortcut__mark--youtube">YT</span>
+            <span class="shortcut__text">
+              <strong>YouTube</strong>
+              <small>Vidéos et musique</small>
+            </span>
+          </a>
+          <a class="shortcut" href="https://fr.wikipedia.org/">
+            <span class="shortcut__mark shortcut__mark--wikipedia">W</span>
+            <span class="shortcut__text">
+              <strong>Wikipédia</strong>
+              <small>Connaissances libres</small>
+            </span>
+          </a>
+          <a class="shortcut" href="https://developer.mozilla.org/fr/">
+            <span class="shortcut__mark shortcut__mark--mdn">MDN</span>
+            <span class="shortcut__text">
+              <strong>MDN</strong>
+              <small>Documentation web</small>
+            </span>
+          </a>
+          <a class="shortcut" href="https://www.reddit.com/">
+            <span class="shortcut__mark shortcut__mark--reddit">R</span>
+            <span class="shortcut__text">
+              <strong>Reddit</strong>
+              <small>Communautés</small>
+            </span>
+          </a>
+          <a class="shortcut" href="https://archive.org/">
+            <span class="shortcut__mark shortcut__mark--archive">IA</span>
+            <span class="shortcut__text">
+              <strong>Internet Archive</strong>
+              <small>Archives du Web</small>
+            </span>
+          </a>
+        </nav>
+      </section>
+
+      <footer class="home__footer">
+        <p>
+          Astuce : <kbd>Ctrl</kbd> + <kbd>L</kbd> pour l’adresse,
+          <kbd>Ctrl</kbd> + <kbd>T</kbd> pour un nouvel onglet,
+          <kbd>Alt</kbd> + <kbd>Home</kbd> pour revenir ici.
+        </p>
+        <span>Page locale · Aucun script distant</span>
+      </footer>
+    </main>
+
+    <script src="home.js"></script>
+  </body>
+</html>

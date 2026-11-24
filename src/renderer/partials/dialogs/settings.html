@@ -1,0 +1,307 @@
+<!-- Paramètres -------------------------------------------------------- -->
+<dialog
+  id="settings-dialog"
+  class="modal modal--settings"
+  aria-labelledby="settings-title"
+>
+  <header class="modal__header">
+    <div>
+      <p class="eyebrow">Configuration</p>
+      <h2 id="settings-title">Paramètres</h2>
+    </div>
+    <button
+      class="icon-button modal__close"
+      type="button"
+      data-close-dialog
+      aria-label="Fermer les paramètres"
+      title="Fermer"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </header>
+
+  <div class="modal__body">
+    <section class="settings-section" aria-labelledby="settings-nav-title">
+      <h3 id="settings-nav-title" class="settings-section__title">
+        Navigation
+      </h3>
+      <div class="settings-group">
+        <div class="setting-row">
+          <div class="setting-row__text">
+            <label class="setting-row__label" for="search-engine-select">
+              Moteur de recherche
+            </label>
+            <p class="setting-row__description">
+              Utilisé par la barre d’adresse et par la page d’accueil locale.
+            </p>
+          </div>
+          <div class="select-wrap">
+            <select id="search-engine-select" class="select">
+              <option value="google">Google</option>
+              <option value="duckduckgo">DuckDuckGo</option>
+              <option value="bing">Bing</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-row__text">
+            <label class="setting-row__label" for="homepage-mode-select">
+              Page d’accueil
+            </label>
+            <p class="setting-row__description">
+              La page locale Think-Browser remplace la page d’un moteur de
+              recherche. Vous pouvez aussi choisir une adresse personnelle.
+            </p>
+          </div>
+          <div class="setting-row__controls">
+            <div class="select-wrap">
+              <select id="homepage-mode-select" class="select">
+                <option value="builtin">Page locale</option>
+                <option value="custom">Page personnalisée</option>
+              </select>
+            </div>
+            <button
+              id="open-home-button"
+              class="button button--secondary button--small"
+              type="button"
+            >
+              Ouvrir
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="homepage-custom-row"
+          class="setting-row setting-row--stack"
+          hidden
+        >
+          <div class="setting-row__text">
+            <label class="setting-row__label" for="homepage-url-input">
+              Adresse de la page personnalisée
+            </label>
+            <p class="setting-row__description">
+              URL HTTP(S) ouverte par le bouton d’accueil et les nouveaux
+              onglets.
+            </p>
+          </div>
+          <div class="folder-picker">
+            <input
+              id="homepage-url-input"
+              class="text-input"
+              type="url"
+              placeholder="https://exemple.com/"
+              spellcheck="false"
+              autocomplete="off"
+            />
+            <button
+              id="homepage-save-button"
+              class="button button--primary button--small"
+              type="button"
+            >
+              Enregistrer
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="settings-section"
+      aria-labelledby="settings-startup-title"
+    >
+      <h3 id="settings-startup-title" class="settings-section__title">
+        Démarrage et mémoire
+      </h3>
+      <div class="settings-group">
+        <div class="setting-row">
+          <div class="setting-row__text">
+            <span class="setting-row__label">Restaurer la session</span>
+            <p class="setting-row__description">
+              Rouvre les fenêtres et les onglets de la dernière session au
+              démarrage.
+            </p>
+          </div>
+          <input
+            id="restore-session-toggle"
+            class="switch"
+            type="checkbox"
+            aria-label="Restaurer la session au démarrage"
+          />
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-row__text">
+            <span class="setting-row__label">Enregistrer l’historique</span>
+            <p class="setting-row__description">
+              Conserve les pages visitées. La désactivation arrête les
+              nouvelles entrées sans effacer les anciennes.
+            </p>
+          </div>
+          <input
+            id="save-history-toggle"
+            class="switch"
+            type="checkbox"
+            aria-label="Enregistrer l’historique de navigation"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="settings-section" aria-labelledby="settings-look-title">
+      <h3 id="settings-look-title" class="settings-section__title">
+        Confort de lecture
+      </h3>
+      <div class="settings-group">
+        <div class="setting-row">
+          <div class="setting-row__text">
+            <label class="setting-row__label" for="default-zoom-select">
+              Zoom par défaut
+            </label>
+            <p class="setting-row__description">
+              Appliqué aux onglets ouverts et aux nouveaux onglets. Le zoom
+              manuel reste modifiable avec Ctrl++ et Ctrl+-.
+            </p>
+          </div>
+          <div class="select-wrap">
+            <select id="default-zoom-select" class="select">
+              <option value="0.75">75 %</option>
+              <option value="0.9">90 %</option>
+              <option value="1">100 %</option>
+              <option value="1.1">110 %</option>
+              <option value="1.25">125 %</option>
+              <option value="1.5">150 %</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="settings-section" aria-labelledby="settings-privacy-title">
+      <h3 id="settings-privacy-title" class="settings-section__title">
+        Confidentialité et sécurité
+      </h3>
+      <div class="settings-group">
+        <div class="setting-row">
+          <div class="setting-row__text">
+            <span class="setting-row__label">Bloqueur de publicités</span>
+            <p class="setting-row__description">
+              Bloque les publicités et les traqueurs connus sur toutes les
+              pages.
+            </p>
+          </div>
+          <input
+            id="adblock-toggle"
+            class="switch"
+            type="checkbox"
+            aria-label="Activer le bloqueur de publicités"
+          />
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-row__text">
+            <span class="setting-row__label">Données de navigation</span>
+            <p class="setting-row__description">
+              Supprime les cookies, le cache, le stockage local et les service
+              workers.
+            </p>
+          </div>
+          <button
+            id="clear-browsing-data-button"
+            class="button button--danger"
+            type="button"
+          >
+            Effacer…
+          </button>
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-row__text">
+            <span class="setting-row__label">Autorisations des sites</span>
+            <p class="setting-row__description">
+              Oublie les choix mémorisés pour la caméra, le microphone, la
+              géolocalisation et les notifications.
+            </p>
+          </div>
+          <button
+            id="reset-permissions-button"
+            class="button button--secondary"
+            type="button"
+          >
+            Réinitialiser…
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="settings-section"
+      aria-labelledby="settings-downloads-title"
+    >
+      <h3 id="settings-downloads-title" class="settings-section__title">
+        Téléchargements
+      </h3>
+      <div class="settings-group">
+        <div class="setting-row setting-row--stack">
+          <div class="setting-row__text">
+            <label class="setting-row__label" for="download-folder-input">
+              Dossier de téléchargement
+            </label>
+            <p class="setting-row__description">
+              Les prochains fichiers seront enregistrés dans ce dossier.
+            </p>
+          </div>
+          <div class="folder-picker">
+            <input
+              id="download-folder-input"
+              class="text-input"
+              type="text"
+              readonly
+              aria-label="Dossier de téléchargement actuel"
+            />
+            <button
+              id="choose-folder-button"
+              class="button button--secondary"
+              type="button"
+            >
+              Choisir…
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="settings-section" aria-labelledby="settings-advanced-title">
+      <h3 id="settings-advanced-title" class="settings-section__title">
+        Avancé
+      </h3>
+      <div class="settings-group">
+        <div class="setting-row">
+          <div class="setting-row__text">
+            <span class="setting-row__label">Réinitialiser les préférences</span>
+            <p class="setting-row__description">
+              Rétablit les paramètres par défaut sans supprimer l’historique,
+              les favoris ni le dossier de téléchargement.
+            </p>
+          </div>
+          <button
+            id="reset-settings-button"
+            class="button button--ghost-danger"
+            type="button"
+          >
+            Réinitialiser…
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="modal__footer">
+    <p id="settings-status" class="modal__hint" aria-live="polite">
+      Les modifications sont enregistrées automatiquement.
+    </p>
+    <button class="button button--primary" type="button" data-close-dialog>
+      Terminé
+    </button>
+  </footer>
+</dialog>

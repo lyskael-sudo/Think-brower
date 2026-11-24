@@ -1,0 +1,275 @@
+<!-- Médiathèque -------------------------------------------------------- -->
+<dialog
+  id="library-dialog"
+  class="modal modal--wide library-modal"
+  aria-labelledby="library-title"
+>
+  <header class="modal__header">
+    <div>
+      <p class="eyebrow">Bibliothèque</p>
+      <h2 id="library-title">Médiathèque</h2>
+      <p class="modal__meta">
+        Vos fichiers téléchargés et importés, lus directement dans le
+        navigateur.
+      </p>
+    </div>
+    <button
+      class="icon-button modal__close"
+      type="button"
+      data-close-dialog
+      aria-label="Fermer la médiathèque"
+      title="Fermer"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </header>
+
+  <div class="modal__body library-body">
+    <div class="library-toolbar">
+      <label class="library-search">
+        <span class="visually-hidden">Rechercher dans la médiathèque</span>
+        <input
+          id="library-search"
+          class="library-search__input"
+          type="search"
+          placeholder="Rechercher un média…"
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </label>
+
+      <label class="library-filter">
+        <span class="visually-hidden">Filtrer les médias</span>
+        <select id="library-filter" class="library-filter__select">
+          <option value="all">Tous les médias</option>
+          <option value="video">Vidéos</option>
+          <option value="audio">Audio</option>
+        </select>
+      </label>
+
+      <label class="library-filter">
+        <span class="visually-hidden">Trier les médias</span>
+        <select id="library-sort" class="library-filter__select">
+          <option value="date-desc">Ajoutés récemment</option>
+          <option value="name-asc">Nom (A–Z)</option>
+          <option value="duration-desc">Durée (longue d’abord)</option>
+        </select>
+      </label>
+
+      <button
+        id="library-import"
+        class="button button--secondary button--small"
+        type="button"
+      >
+        Importer
+      </button>
+
+      <p id="library-count" class="modal__meta library-count">
+        Aucun média
+      </p>
+    </div>
+
+    <div id="library-list" class="library-grid"></div>
+
+    <div id="library-empty" class="library-empty" hidden>
+      <p class="library-empty__title">Votre médiathèque est vide.</p>
+      <p class="library-empty__text">
+        Les vidéos et fichiers audio terminés apparaissent ici
+        automatiquement. Vous pouvez aussi importer un fichier local.
+      </p>
+      <button
+        id="library-empty-import"
+        class="button button--primary"
+        type="button"
+      >
+        Importer un média
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Renommage ---------------------------------------------------------- -->
+<dialog
+  id="library-rename-dialog"
+  class="modal modal--compact"
+  aria-labelledby="library-rename-title"
+>
+  <header class="modal__header">
+    <div>
+      <p class="eyebrow">Médiathèque</p>
+      <h2 id="library-rename-title">Renommer le média</h2>
+    </div>
+    <button
+      class="icon-button modal__close"
+      type="button"
+      data-close-dialog
+      aria-label="Annuler le renommage"
+      title="Fermer"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </header>
+
+  <div class="modal__body">
+    <label class="library-rename-field">
+      <span class="setting-row__label">Nouveau nom</span>
+      <input
+        id="library-rename-input"
+        class="text-input"
+        type="text"
+        maxlength="180"
+        autocomplete="off"
+        spellcheck="false"
+      />
+    </label>
+    <p
+      id="library-rename-error"
+      class="modal__hint"
+      data-variant="error"
+      hidden
+    ></p>
+  </div>
+
+  <footer class="modal__footer">
+    <button
+      class="button button--secondary"
+      type="button"
+      data-close-dialog
+    >
+      Annuler
+    </button>
+    <button
+      id="library-rename-confirm"
+      class="button button--primary"
+      type="button"
+    >
+      Renommer
+    </button>
+  </footer>
+</dialog>
+
+<!-- Lecteur ------------------------------------------------------------ -->
+<dialog
+  id="player-dialog"
+  class="modal player-modal"
+  aria-labelledby="player-title"
+>
+  <header class="player-header">
+    <div class="player-heading">
+      <p class="eyebrow">Lecture</p>
+      <h2 id="player-title">Média</h2>
+      <p id="player-subtitle" class="player-subtitle"></p>
+    </div>
+    <div class="player-header__actions">
+      <button
+        id="player-reveal"
+        class="button button--ghost button--small"
+        type="button"
+        title="Afficher dans le dossier"
+      >
+        Dossier
+      </button>
+      <button
+        class="icon-button modal__close"
+        type="button"
+        data-close-dialog
+        aria-label="Fermer le lecteur"
+        title="Fermer"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="player-stage">
+    <video id="player-video" playsinline preload="metadata"></video>
+    <p id="player-error" class="player-error" hidden></p>
+  </div>
+
+  <footer class="player-controls">
+    <button
+      id="player-rewind"
+      class="player-control"
+      type="button"
+      title="Reculer de 10 secondes (←)"
+      aria-label="Reculer de 10 secondes"
+    >
+      −10
+    </button>
+    <button
+      id="player-toggle"
+      class="player-control player-control--primary"
+      type="button"
+      title="Lecture / pause (Espace)"
+      aria-label="Lire"
+    >
+      ▶
+    </button>
+    <button
+      id="player-forward"
+      class="player-control"
+      type="button"
+      title="Avancer de 10 secondes (→)"
+      aria-label="Avancer de 10 secondes"
+    >
+      +10
+    </button>
+
+    <span id="player-time" class="player-time">0:00 / 0:00</span>
+
+    <input
+      id="player-progress"
+      class="player-progress"
+      type="range"
+      min="0"
+      max="1000"
+      step="1"
+      value="0"
+      aria-label="Position de lecture"
+    />
+
+    <button
+      id="player-mute"
+      class="player-control"
+      type="button"
+      title="Couper le son (M)"
+      aria-label="Couper le son"
+    >
+      🔊
+    </button>
+    <input
+      id="player-volume"
+      class="player-volume"
+      type="range"
+      min="0"
+      max="1"
+      step="0.01"
+      value="1"
+      aria-label="Volume"
+    />
+
+    <select
+      id="player-speed"
+      class="player-speed"
+      aria-label="Vitesse de lecture"
+      title="Vitesse de lecture"
+    >
+      <option value="0.5">0,5×</option>
+      <option value="0.75">0,75×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.25">1,25×</option>
+      <option value="1.5">1,5×</option>
+      <option value="2">2×</option>
+    </select>
+
+    <button
+      id="player-fullscreen"
+      class="player-control"
+      type="button"
+      title="Plein écran (F)"
+      aria-label="Plein écran"
+    >
+      ⛶
+    </button>
+  </footer>
+</dialog>

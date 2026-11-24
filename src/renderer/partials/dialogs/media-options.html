@@ -1,0 +1,66 @@
+<!-- Options de téléchargement d'un flux ------------------------------- -->
+<dialog
+  id="media-options-dialog"
+  class="modal"
+  aria-labelledby="media-options-title"
+>
+  <div class="modal__surface">
+    <header class="modal__header">
+      <div>
+        <p class="eyebrow">Téléchargement de flux</p>
+        <h2 id="media-options-title">Choisir les pistes</h2>
+      </div>
+      <button
+        id="media-options-close"
+        class="icon-button"
+        type="button"
+        aria-label="Fermer les options du flux"
+        title="Fermer"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </header>
+
+    <div class="modal__body">
+      <p id="media-options-summary" class="dialog-text"></p>
+
+      <div id="media-options-live" class="media-options__notice" hidden>
+        <strong>Flux en direct.</strong>
+        L’enregistrement continue jusqu’à l’action « Arrêter et conserver »
+        dans Téléchargements.
+      </div>
+
+      <label class="field" for="media-audio-track">
+        <span class="field__label">Piste audio</span>
+        <select id="media-audio-track" class="field__control"></select>
+      </label>
+
+      <label class="field" for="media-subtitle-track">
+        <span class="field__label">Sous-titres</span>
+        <select id="media-subtitle-track" class="field__control"></select>
+      </label>
+
+      <p class="dialog-text dialog-text--muted">
+        Les pistes sont assemblées sans réencodage vidéo. Les sous-titres sont
+        convertis au format MP4 lorsque nécessaire.
+      </p>
+    </div>
+
+    <footer class="modal__footer">
+      <button
+        id="media-options-cancel"
+        class="button button--ghost"
+        type="button"
+      >
+        Annuler
+      </button>
+      <button
+        id="media-options-start"
+        class="button button--primary"
+        type="button"
+      >
+        Télécharger le flux
+      </button>
+    </footer>
+  </div>
+</dialog>

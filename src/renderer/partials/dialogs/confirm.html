@@ -1,0 +1,29 @@
+<!-- Confirmation ------------------------------------------------------ -->
+<dialog
+  id="confirm-dialog"
+  class="modal modal--confirm"
+  aria-labelledby="confirm-title"
+  aria-describedby="confirm-message"
+>
+  <div class="modal__body">
+    <p class="eyebrow">Confirmation</p>
+    <h2 id="confirm-title">Confirmer l'action</h2>
+    <p id="confirm-message" class="confirm-message"></p>
+  </div>
+  <footer class="modal__footer">
+    <button
+      id="confirm-cancel"
+      class="button button--secondary"
+      type="button"
+    >
+      Annuler
+    </button>
+    <button
+      id="confirm-accept"
+      class="button button--danger"
+      type="button"
+    >
+      Confirmer
+    </button>
+  </footer>
+</dialog>

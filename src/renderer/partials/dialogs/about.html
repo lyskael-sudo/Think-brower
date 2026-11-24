@@ -1,0 +1,61 @@
+<!-- À propos ---------------------------------------------------------- -->
+<dialog
+  id="about-dialog"
+  class="modal modal--compact"
+  aria-labelledby="about-title"
+>
+  <div class="about-hero">
+    <button
+      class="icon-button modal__close about-close"
+      type="button"
+      data-close-dialog
+      aria-label="Fermer la fenêtre À propos"
+      title="Fermer"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+    <img
+      class="brand__logo brand__logo--large"
+      src="../../assets/icons/app.svg"
+      alt=""
+      width="48"
+      height="52"
+    />
+    <h2 id="about-title">Think-Browser</h2>
+    <p>
+      Un navigateur de bureau sombre, rapide et pensé pour une navigation
+      confortable au quotidien.
+    </p>
+  </div>
+
+  <div class="modal__body">
+    <dl class="version-grid">
+      <div class="version-item">
+        <dt>Version</dt>
+        <dd id="about-version">—</dd>
+      </div>
+      <div class="version-item">
+        <dt>Electron</dt>
+        <dd id="about-electron">—</dd>
+      </div>
+      <div class="version-item">
+        <dt>Chromium</dt>
+        <dd id="about-chrome">—</dd>
+      </div>
+      <div class="version-item">
+        <dt>Node.js</dt>
+        <dd id="about-node">—</dd>
+      </div>
+    </dl>
+
+    <p class="about-note">
+      Moteur de rendu Chromium · Interface Electron · Page d’accueil locale
+    </p>
+  </div>
+
+  <footer class="modal__footer">
+    <button class="button button--primary" type="button" data-close-dialog>
+      Fermer
+    </button>
+  </footer>
+</dialog>

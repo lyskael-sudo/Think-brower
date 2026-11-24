@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src 'self'; base-uri 'none'; form-action 'none';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>about:config — Think-Browser</title>
+    <link rel="stylesheet" href="pages.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand__mark" aria-hidden="true">T</span>
+          <span>
+            Think-Browser
+            <small>Configuration locale</small>
+          </span>
+        </div>
+        <nav class="page-nav" aria-label="Pages internes">
+          <a href="think-page://config/" aria-current="page">about:config</a>
+          <a href="think-page://security/">about:security</a>
+          <a href="think-page://dev/">about:dev</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Paramètres avancés</p>
+          <h1>about:config</h1>
+          <p>
+            Réglez le moteur de recherche, les téléchargements, les extensions
+            intégrées et les options de confidentialité. Les valeurs sont
+            validées dans le processus principal avant d’être enregistrées.
+          </p>
+        </div>
+        <div id="config-pills" class="hero__meta" aria-label="État">
+          <span class="pill">Chargement…</span>
+        </div>
+      </section>
+
+      <p id="config-status" class="status" role="status" aria-live="polite"></p>
+
+      <div class="grid">
+        <section class="card" aria-labelledby="nav-title">
+          <div class="card__head">
+            <div>
+              <h2 id="nav-title">Navigation et apparence</h2>
+              <p>Moteur de recherche, page d’accueil, thème et langue.</p>
+            </div>
+          </div>
+          <div class="card__body stack">
+            <div class="field">
+              <label for="search-engine">Moteur de recherche</label>
+              <select id="search-engine"></select>
+              <p class="field__hint">
+                Utilisé lorsqu’une saisie n’est pas une URL.
+              </p>
+            </div>
+
+            <div class="field">
+              <label for="home-mode">Page d’accueil</label>
+              <select id="home-mode">
+                <option value="builtin">Page interne Think-Browser</option>
+                <option value="custom">Adresse personnalisée</option>
+              </select>
+            </div>
+
+            <div id="home-url-field" class="field" hidden>
+              <label for="home-url">Adresse HTTP(S) personnalisée</label>
+              <input
+                id="home-url"
+                type="url"
+                placeholder="https://exemple.fr/"
+                spellcheck="false"
+              />
+            </div>
+
+            <div class="field">
+              <label for="theme">Thème</label>
+              <select id="theme"></select>
+              <p id="theme-hint" class="field__hint"></p>
+            </div>
+
+            <div class="field">
+              <label for="language">Langue de l’interface</label>
+              <select id="language"></select>
+              <p id="language-hint" class="field__hint"></p>
+            </div>
+
+            <div class="field">
+              <label for="zoom">Zoom par défaut : <span id="zoom-value">100 %</span></label>
+              <input id="zoom" type="range" min="50" max="300" step="10" />
+            </div>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="downloads-title">
+          <div class="card__head">
+            <div>
+              <h2 id="downloads-title">Téléchargements</h2>
+              <p>Dossier, file de flux et en-têtes des liens directs.</p>
+            </div>
+          </div>
+          <div class="card__body stack">
+            <div class="field">
+              <span class="field__label">Dossier de destination</span>
+              <div class="field__row">
+                <input id="download-dir" type="text" readonly />
+                <button id="choose-download-dir" class="btn" type="button">
+                  Choisir…
+                </button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="stream-concurrency">
+                Flux HLS/DASH simultanés
+              </label>
+              <input
+                id="stream-concurrency"
+                type="number"
+                min="1"
+                max="4"
+                step="1"
+              />
+              <p id="stream-hint" class="field__hint"></p>
+            </div>
+
+            <label class="check" for="link-referer">
+              <input id="link-referer" type="checkbox" />
+              <span class="check__text">
+                <strong>Envoyer le Referer de la page source</strong>
+                <small>
+                  Pour les liens directs et les manifestes HLS/DASH. Les
+                  cookies de la session sont ajoutés automatiquement par
+                  Chromium, jamais exposés à la page.
+                </small>
+              </span>
+            </label>
+
+            <div class="field">
+              <span class="field__label">Outils média</span>
+              <div id="media-capabilities" class="field__row">
+                <span class="pill">Vérification…</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <span class="field__label">Télécharger une vidéo par lien</span>
+              <div class="field__row">
+                <input
+                  id="direct-url"
+                  type="url"
+                  placeholder="https://exemple.fr/video.mp4 ou manifeste .m3u8"
+                  spellcheck="false"
+                />
+                <button id="direct-inspect" class="btn btn--primary" type="button">
+                  Analyser
+                </button>
+              </div>
+              <p id="direct-hint" class="field__hint">
+                Collez un lien direct. Les flux protégés par DRM, les systèmes
+                anti-bot et les lecteurs MSE/blob ne sont pas contournés.
+              </p>
+              <div id="direct-result" class="notice" hidden></div>
+              <div id="direct-actions" class="btn-row" hidden>
+                <button id="direct-download" class="btn btn--primary" type="button">
+                  Télécharger ce lien
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card card--wide" aria-labelledby="extensions-title">
+          <div class="card__head">
+            <div>
+              <h2 id="extensions-title">Extensions intégrées</h2>
+              <p>
+                Catalogue local uniquement : aucun code tiers, aucune
+                installation distante, aucun accès au Chrome Web Store.
+              </p>
+            </div>
+            <span id="extensions-count" class="pill">—</span>
+          </div>
+          <div class="card__body">
+            <div id="extensions-list" class="ext-list" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="privacy-title">
+          <div class="card__head">
+            <div>
+              <h2 id="privacy-title">Confidentialité</h2>
+              <p>Historique, restauration de session et filtrage réseau.</p>
+            </div>
+          </div>
+          <div class="card__body stack">
+            <label class="check" for="save-history">
+              <input id="save-history" type="checkbox" />
+              <span class="check__text">
+                <strong>Enregistrer l’historique</strong>
+                <small>Désactivez cette option pour ne plus journaliser les pages visitées.</small>
+              </span>
+            </label>
+
+            <label class="check" for="restore-session">
+              <input id="restore-session" type="checkbox" />
+              <span class="check__text">
+                <strong>Restaurer la session au démarrage</strong>
+                <small>Rouvre les onglets et fenêtres normales de la dernière session.</small>
+              </span>
+            </label>
+
+            <label class="check" for="adblock-enabled">
+              <input id="adblock-enabled" type="checkbox" />
+              <span class="check__text">
+                <strong>Bloquer les publicités et traqueurs</strong>
+                <small>Filtrage réseau local. L’état réel du moteur est affiché ci-dessous.</small>
+              </span>
+            </label>
+
+            <p id="adblock-status" class="field__hint"></p>
+
+            <div class="btn-row">
+              <a class="btn btn--ghost" href="think-page://security/">
+                Ouvrir le diagnostic de sécurité
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="maintenance-title">
+          <div class="card__head">
+            <div>
+              <h2 id="maintenance-title">Maintenance</h2>
+              <p>Informations de version et remise à zéro des préférences.</p>
+            </div>
+          </div>
+          <div class="card__body stack">
+            <dl class="kv">
+              <dt>Version</dt>
+              <dd id="app-version">—</dd>
+              <dt>Electron</dt>
+              <dd id="app-electron" class="mono">—</dd>
+              <dt>Chromium</dt>
+              <dd id="app-chrome" class="mono">—</dd>
+              <dt>Node.js</dt>
+              <dd id="app-node" class="mono">—</dd>
+              <dt>User-Agent</dt>
+              <dd id="app-user-agent" class="mono">—</dd>
+            </dl>
+            <div class="notice">
+              <strong>Réinitialisation.</strong> Les préférences reviennent à
+              leur valeur par défaut. Le dossier de téléchargement et l’espace
+              de développement sont conservés.
+            </div>
+            <div class="btn-row">
+              <button id="reset-settings" class="btn btn--danger" type="button">
+                Réinitialiser les préférences
+              </button>
+              <button id="refresh-config" class="btn" type="button">
+                Actualiser
+              </button>
+            </div>
+            <p id="maintenance-status" class="status" role="status"></p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="footer">
+        Think-Browser · Les pages internes ne chargent aucun contenu distant et
+        n’accordent aucun accès Node.js.
+      </footer>
+    </main>
+
+    <script src="config.js"></script>
+  </body>
+</html>

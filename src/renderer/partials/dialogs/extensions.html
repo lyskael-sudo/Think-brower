@@ -1,0 +1,40 @@
+<!-- Extensions internes ----------------------------------------------- -->
+<dialog
+  id="extensions-dialog"
+  class="modal modal--extensions"
+  aria-labelledby="extensions-title"
+>
+  <header class="modal__header">
+    <div>
+      <p class="eyebrow">Personnalisation</p>
+      <h2 id="extensions-title">Extensions</h2>
+    </div>
+    <button
+      class="icon-button modal__close"
+      type="button"
+      data-close-dialog
+      aria-label="Fermer les extensions"
+      title="Fermer"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </header>
+
+  <div class="modal__body">
+    <p class="extensions-intro">
+      Les extensions embarquées ne chargent aucun code distant. Leur activation
+      est validée par le processus principal.
+    </p>
+
+    <div id="extensions-list" class="extensions-list"></div>
+  </div>
+
+  <footer class="modal__footer">
+    <p id="extensions-status" class="modal__hint" aria-live="polite">
+      Les changements sont appliqués immédiatement.
+    </p>
+    <button class="button button--primary" type="button" data-close-dialog>
+      Terminé
+    </button>
+  </footer>
+</dialog>

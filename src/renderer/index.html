@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <!--
+      `unsafe-inline` est requis pour les styles internes injectés par le
+      composant <webview> d'Electron. Les scripts restent limités à 'self'.
+      L'interface hôte est locale ; les pages distantes sont isolées dans les
+      webviews et n'ont jamais accès à Node.js.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: http: think-media:; media-src 'self' think-media:; object-src 'none'; frame-src http: https:; base-uri 'none'; form-action 'self';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0f14" />
+    <title>Think-Browser</title>
+    <link
+      rel="icon"
+      href="../../assets/icons/favicon.svg"
+      type="image/svg+xml"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/tabs.css" />
+    <link rel="stylesheet" href="styles/navbar.css" />
+    <link rel="stylesheet" href="styles/menu.css" />
+    <link rel="stylesheet" href="styles/library.css" />
+    <link rel="stylesheet" href="styles/extensions.css" />
+    <link rel="stylesheet" href="styles/themes.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div data-partial="tabbar"></div>
+      <div data-partial="toolbar"></div>
+      <div data-partial="browser"></div>
+    </div>
+
+    <div data-partial="favorites-dialog"></div>
+    <div data-partial="history-dialog"></div>
+    <div data-partial="downloads-dialog"></div>
+    <div data-partial="media-options-dialog"></div>
+    <div data-partial="link-download-dialog"></div>
+    <div data-partial="library-dialog"></div>
+    <div data-partial="settings-dialog"></div>
+    <div data-partial="extensions-dialog"></div>
+    <div data-partial="about-dialog"></div>
+    <div data-partial="confirm-dialog"></div>
+
+    <div id="boot-error" class="boot-error" role="alert" hidden></div>
+
+    <script src="js/bootstrap.bundle.js"></script>
+  </body>
+</html>

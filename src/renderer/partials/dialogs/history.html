@@ -1,0 +1,36 @@
+<!-- Historique -------------------------------------------------------- -->
+<dialog
+  id="history-dialog"
+  class="modal modal--wide"
+  aria-labelledby="history-title"
+>
+  <header class="modal__header">
+    <div>
+      <p class="eyebrow">Navigation</p>
+      <h2 id="history-title">Historique</h2>
+    </div>
+    <button
+      class="icon-button modal__close"
+      type="button"
+      data-close-dialog
+      aria-label="Fermer l'historique"
+      title="Fermer"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </header>
+
+  <div class="modal__body">
+    <div class="modal__toolbar">
+      <p id="history-count" class="modal__meta">Aucune visite</p>
+      <button
+        id="clear-history-button"
+        class="button button--ghost-danger"
+        type="button"
+      >
+        Effacer l'historique
+      </button>
+    </div>
+    <div id="history-list" class="record-list"></div>
+  </div>
+</dialog>

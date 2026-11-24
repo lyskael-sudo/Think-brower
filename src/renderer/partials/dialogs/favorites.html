@@ -1,0 +1,87 @@
+<!-- Favoris ----------------------------------------------------------- -->
+<dialog
+  id="favorites-dialog"
+  class="modal modal--wide"
+  aria-labelledby="favorites-title"
+>
+  <header class="modal__header">
+    <div>
+      <p class="eyebrow">Bibliothèque</p>
+      <h2 id="favorites-title">Favoris</h2>
+    </div>
+    <button
+      class="icon-button modal__close"
+      type="button"
+      data-close-dialog
+      aria-label="Fermer les favoris"
+      title="Fermer"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </header>
+
+  <div class="modal__body favorites-layout">
+    <aside class="favorites-sidebar" aria-label="Dossiers de favoris">
+      <p class="favorites-sidebar__title">Dossiers</p>
+      <div id="favorite-folders" class="favorite-folders"></div>
+      <button
+        id="new-favorite-folder-button"
+        class="button button--secondary button--small favorites-sidebar__new"
+        type="button"
+      >
+        Nouveau dossier
+      </button>
+      <form id="favorite-folder-form" class="favorite-folder-form" hidden>
+        <label class="visually-hidden" for="favorite-folder-name">
+          Nom du dossier
+        </label>
+        <input
+          id="favorite-folder-name"
+          class="text-input"
+          type="text"
+          maxlength="60"
+          placeholder="Nom du dossier"
+          autocomplete="off"
+        />
+        <div class="favorite-folder-form__actions">
+          <button
+            id="favorite-folder-cancel"
+            class="button button--ghost button--small"
+            type="button"
+          >
+            Annuler
+          </button>
+          <button
+            class="button button--primary button--small"
+            type="submit"
+          >
+            Créer
+          </button>
+        </div>
+      </form>
+    </aside>
+
+    <section class="favorites-content" aria-label="Liste des favoris">
+      <div class="modal__toolbar">
+        <p id="favorites-count" class="modal__meta">Aucun favori</p>
+        <div class="favorites-actions">
+          <button
+            id="import-favorites-button"
+            class="button button--ghost button--small"
+            type="button"
+          >
+            Importer
+          </button>
+          <button
+            id="export-favorites-button"
+            class="button button--ghost button--small"
+            type="button"
+          >
+            Exporter
+          </button>
+        </div>
+      </div>
+      <div id="favorites-list" class="record-list favorite-list"></div>
+    </section>
+  </div>
+</dialog>

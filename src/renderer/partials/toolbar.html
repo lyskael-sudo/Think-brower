@@ -1,0 +1,447 @@
+<!-- Barre d'outils -------------------------------------------------- -->
+<header class="toolbar" role="banner">
+  <span id="private-badge" class="private-badge" hidden>
+    Navigation privée
+  </span>
+
+  <nav class="nav-buttons" aria-label="Navigation">
+    <button
+      id="back-button"
+      class="icon-button"
+      type="button"
+      title="Précédent"
+      aria-label="Page précédente"
+      disabled
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M14.5 5.5 8 12l6.5 6.5" />
+      </svg>
+    </button>
+    <button
+      id="forward-button"
+      class="icon-button"
+      type="button"
+      title="Suivant"
+      aria-label="Page suivante"
+      disabled
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M9.5 5.5 16 12l-6.5 6.5" />
+      </svg>
+    </button>
+    <button
+      id="reload-button"
+      class="icon-button"
+      type="button"
+      title="Actualiser (Ctrl+R ou F5)"
+      aria-label="Actualiser la page"
+      disabled
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M20 11a8 8 0 1 0-2.2 5.4" />
+        <path d="M20 4v7h-7" />
+      </svg>
+    </button>
+    <button
+      id="home-button"
+      class="icon-button home-button"
+      type="button"
+      title="Page d'accueil (Alt+Home)"
+      aria-label="Ouvrir la page d'accueil"
+      disabled
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="m4 10.5 8-6.5 8 6.5" />
+        <path d="M6.5 9.5V20h11V9.5" />
+        <path d="M10 20v-5.5h4V20" />
+      </svg>
+    </button>
+  </nav>
+
+  <form id="nav-form" class="address-form" role="search">
+    <svg
+      class="address-form__icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.7"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path
+        d="M3.5 12h17M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"
+      />
+    </svg>
+
+    <label class="visually-hidden" for="url-input">
+      Rechercher ou saisir une adresse
+    </label>
+    <input
+      id="url-input"
+      type="text"
+      placeholder="Rechercher ou entrer une URL…"
+      autocomplete="off"
+      autocapitalize="off"
+      spellcheck="false"
+    />
+    <button
+      id="clear-address-button"
+      class="address-form__clear"
+      type="button"
+      title="Effacer l’adresse"
+      aria-label="Effacer l’adresse"
+      hidden
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+    <button id="go-button" class="go-button" type="submit">
+      <span>Aller</span>
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 12h13M13 7l5 5-5 5" />
+      </svg>
+    </button>
+  </form>
+
+  <button
+    id="favorite-button"
+    class="icon-button favorite-button"
+    type="button"
+    title="Ajouter aux favoris"
+    aria-label="Ajouter cette page aux favoris"
+    aria-pressed="false"
+    disabled
+  >
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.7"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path
+        d="m12 3.8 2.5 5.1 5.6.8-4.1 4 1 5.6-5-2.7-5 2.7 1-5.6-4.1-4 5.6-.8L12 3.8Z"
+      />
+    </svg>
+  </button>
+
+  <button
+    id="media-indicator"
+    class="media-indicator"
+    type="button"
+    aria-label="Afficher les médias détectés"
+    aria-controls="media-panel"
+    aria-expanded="false"
+    hidden
+  >
+    <span class="media-indicator__dot" aria-hidden="true"></span>
+    <span class="media-indicator__label">Médias détectés</span>
+    <span
+      id="media-count"
+      class="media-indicator__count"
+      aria-hidden="true"
+      >0</span
+    >
+  </button>
+
+  <span
+    id="tracker-indicator"
+    class="tracker-indicator"
+    role="status"
+    aria-live="polite"
+    hidden
+  >
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 3 5 6v5.5c0 4.2 2.8 7.4 7 9.5 4.2-2.1 7-5.3 7-9.5V6l-7-3Z" />
+      <path d="m9.2 12 2 2 3.6-3.8" />
+    </svg>
+    <span id="tracker-count" class="tracker-indicator__count">0</span>
+  </span>
+
+  <div class="menu-container">
+    <button
+      id="menu-button"
+      class="icon-button menu-button"
+      type="button"
+      title="Menu"
+      aria-label="Ouvrir le menu principal"
+      aria-haspopup="menu"
+      aria-controls="app-menu"
+      aria-expanded="false"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        stroke="none"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="5" r="1.4" />
+        <circle cx="12" cy="12" r="1.4" />
+        <circle cx="12" cy="19" r="1.4" />
+      </svg>
+    </button>
+
+    <div
+      id="app-menu"
+      class="menu-popover"
+      role="menu"
+      aria-label="Menu principal"
+      hidden
+    >
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="new-tab"
+      >
+        <span>Nouvel onglet</span>
+        <kbd class="menu-shortcut">Ctrl+T</kbd>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="home-page"
+      >
+        <span>Page d’accueil</span>
+        <kbd class="menu-shortcut">Alt+Home</kbd>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="reopen-tab"
+      >
+        <span>Rouvrir l’onglet fermé</span>
+        <kbd class="menu-shortcut">Ctrl+Shift+T</kbd>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="new-window"
+      >
+        <span>Nouvelle fenêtre</span>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="new-private-window"
+      >
+        <span>Nouvelle fenêtre privée</span>
+        <kbd class="menu-shortcut">Ctrl+Shift+P</kbd>
+      </button>
+
+      <div class="menu-separator" role="separator"></div>
+
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="find-in-page"
+      >
+        <span>Rechercher dans la page</span>
+        <kbd class="menu-shortcut">Ctrl+F</kbd>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="zoom-in"
+      >
+        <span>Zoom avant</span>
+        <kbd class="menu-shortcut">Ctrl++</kbd>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="zoom-out"
+      >
+        <span>Zoom arrière</span>
+        <kbd class="menu-shortcut">Ctrl+-</kbd>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="zoom-reset"
+      >
+        <span>Zoom 100 %</span>
+        <kbd class="menu-shortcut">Ctrl+0</kbd>
+      </button>
+
+      <div class="menu-separator" role="separator"></div>
+
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="favorites"
+      >
+        <span>Favoris</span>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="history"
+      >
+        <span>Historique</span>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="extract-media"
+      >
+        <span>Analyser les médias de la page</span>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="downloads"
+      >
+        <span>Téléchargements</span>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="download-link"
+      >
+        <span>Télécharger une vidéo par lien…</span>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="library"
+      >
+        <span>Médiathèque</span>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="extensions"
+      >
+        <span>Extensions</span>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="settings"
+      >
+        <span>Paramètres</span>
+      </button>
+
+      <div class="menu-separator" role="separator"></div>
+
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="devtools-page"
+      >
+        <span>DevTools de la page</span>
+        <kbd class="menu-shortcut">Ctrl+Shift+I</kbd>
+      </button>
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="devtools-app"
+      >
+        <span>DevTools de l’application</span>
+        <kbd class="menu-shortcut">Ctrl+Shift+Alt+I</kbd>
+      </button>
+
+      <div class="menu-separator" role="separator"></div>
+
+      <button
+        class="menu-item"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        data-action="about"
+      >
+        <span>À propos de Think-Browser</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="page-progress" class="toolbar__progress" aria-hidden="true" hidden>
+    <span></span>
+  </div>
+</header>

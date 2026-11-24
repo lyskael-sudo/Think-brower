@@ -1,0 +1,95 @@
+/* --------------------------------------------------------------------------
+   Panneau des extensions internes
+   -------------------------------------------------------------------------- */
+
+.modal--extensions {
+  width: min(640px, calc(100vw - 32px));
+}
+
+.extensions-intro {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(107, 149, 255, 0.18);
+  border-radius: 9px;
+  color: var(--text-muted);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+.extensions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.extension-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 11px;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    opacity 140ms ease;
+}
+
+.extension-card--disabled {
+  opacity: 0.68;
+}
+
+.extension-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.extension-card__text {
+  min-width: 0;
+}
+
+.extension-card__title {
+  margin: 0;
+  color: var(--text);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.extension-card__meta {
+  margin: 3px 0 0;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.02em;
+}
+
+.extension-card__description {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+.extension-card__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.extension-card__option-label {
+  color: var(--text);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.extension-card__option .select {
+  width: min(190px, 55%);
+}

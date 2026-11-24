@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src 'self'; base-uri 'none'; form-action 'none';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>about:dev — Think-Browser</title>
+    <link rel="stylesheet" href="pages.css" />
+    <link rel="stylesheet" href="dev.css" />
+  </head>
+  <body>
+    <main class="page page--wide">
+      <header class="topbar dev-topbar">
+        <div class="brand">
+          <span class="brand__mark" aria-hidden="true">T</span>
+          <span>
+            Think-Browser Dev
+            <small>Atelier local</small>
+          </span>
+        </div>
+        <nav class="page-nav" aria-label="Pages internes">
+          <a href="think-page://config/">about:config</a>
+          <a href="think-page://security/">about:security</a>
+          <a href="think-page://dev/" aria-current="page">about:dev</a>
+        </nav>
+      </header>
+
+      <section class="dev-heading">
+        <div>
+          <p class="eyebrow">Éditeur, aperçu et terminal</p>
+          <h1>about:dev</h1>
+          <p class="dev-heading__lead">
+            Un espace de travail local pour HTML, CSS, JavaScript, Python, PHP
+            et Go. Les fichiers restent dans le dossier choisi ; aucun contenu
+            n’est envoyé à un service distant.
+          </p>
+        </div>
+        <div class="dev-heading__actions">
+          <button id="dev-choose-workspace" class="btn btn--primary" type="button">
+            Choisir un dossier
+          </button>
+          <button id="dev-refresh" class="btn" type="button">Actualiser</button>
+        </div>
+      </section>
+
+      <div class="dev-workspace-bar">
+        <span class="dev-workspace-bar__label">Espace</span>
+        <span id="dev-workspace-path" class="mono">—</span>
+        <span id="dev-workspace-state" class="pill">Chargement…</span>
+      </div>
+
+      <p id="dev-status" class="status" role="status" aria-live="polite"></p>
+
+      <section class="dev-shell" aria-label="Atelier de développement">
+        <aside class="dev-sidebar" aria-label="Explorateur de fichiers">
+          <div class="dev-sidebar__head">
+            <strong>Explorateur</strong>
+            <div class="dev-icon-row">
+              <button id="dev-new-file" class="dev-icon-button" type="button" title="Nouveau fichier" aria-label="Nouveau fichier">＋</button>
+              <button id="dev-new-folder" class="dev-icon-button" type="button" title="Nouveau dossier" aria-label="Nouveau dossier">▱</button>
+              <button id="dev-rename-entry" class="dev-icon-button" type="button" title="Renommer" aria-label="Renommer" disabled>✎</button>
+              <button id="dev-delete-entry" class="dev-icon-button" type="button" title="Supprimer" aria-label="Supprimer" disabled>×</button>
+            </div>
+          </div>
+          <div id="dev-tree" class="dev-tree" role="tree" aria-label="Fichiers du projet"></div>
+          <div class="dev-sidebar__foot">
+            <div class="dev-sidebar__section-head">
+              <strong>Interpréteurs</strong>
+              <button id="dev-refresh-runtimes" class="dev-icon-button" type="button" title="Redétecter" aria-label="Redétecter les interpréteurs">↻</button>
+            </div>
+            <div id="dev-runtimes" class="dev-runtimes"></div>
+            <p class="dev-sidebar__warning">
+              Le terminal n’est pas une sandbox. N’exécutez que du code de
+              confiance.
+            </p>
+          </div>
+        </aside>
+
+        <div class="dev-main">
+          <div class="dev-tabs-bar">
+            <div id="dev-tabs" class="dev-tabs" role="tablist" aria-label="Fichiers ouverts"></div>
+            <div class="dev-tab-actions">
+              <button id="dev-save" class="dev-action" type="button" title="Enregistrer (Ctrl+S)" disabled>Enregistrer</button>
+              <button id="dev-run" class="dev-action dev-action--accent" type="button" title="Exécuter (Ctrl+Entrée)" disabled>Exécuter</button>
+              <button id="dev-preview" class="dev-action" type="button" title="Prévisualiser" disabled>Aperçu</button>
+            </div>
+          </div>
+
+          <div id="dev-breadcrumb" class="dev-breadcrumb">Aucun fichier ouvert</div>
+
+          <div class="dev-editor-area">
+            <div id="dev-empty" class="dev-empty">
+              <span class="dev-empty__mark" aria-hidden="true">⌘</span>
+              <strong>Ouvrez un fichier</strong>
+              <p>
+                Sélectionnez un fichier dans l’explorateur ou créez-en un avec
+                le bouton ＋.
+              </p>
+              <div class="dev-empty__actions">
+                <button id="dev-empty-new" class="btn btn--primary" type="button">Nouveau fichier</button>
+                <button id="dev-empty-folder" class="btn" type="button">Nouveau dossier</button>
+              </div>
+            </div>
+            <div id="dev-editor-wrap" class="dev-editor-wrap" hidden>
+              <div id="dev-line-numbers" class="dev-line-numbers" aria-hidden="true"></div>
+              <textarea
+                id="dev-editor"
+                class="dev-editor"
+                spellcheck="false"
+                autocomplete="off"
+                autocapitalize="off"
+                wrap="off"
+                aria-label="Éditeur de code"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="dev-statusbar">
+            <span id="dev-status-language">—</span>
+            <span id="dev-status-position">Ln 1, Col 1</span>
+            <span id="dev-status-size">—</span>
+            <span id="dev-status-dirty" class="dev-statusbar__dirty" hidden>Non enregistré</span>
+            <span class="dev-statusbar__spacer"></span>
+            <span id="dev-status-workspace">—</span>
+          </div>
+
+          <div class="dev-panel">
+            <div class="dev-panel__tabs" role="tablist" aria-label="Panneaux">
+              <button class="dev-panel__tab" type="button" data-panel="terminal" role="tab" aria-selected="true">Terminal</button>
+              <button class="dev-panel__tab" type="button" data-panel="output" role="tab" aria-selected="false">Exécution</button>
+              <button class="dev-panel__tab" type="button" data-panel="preview" role="tab" aria-selected="false">Aperçu</button>
+              <span class="dev-statusbar__spacer"></span>
+              <button id="dev-clear-terminal" class="dev-panel__action" type="button">Effacer</button>
+            </div>
+
+            <div id="dev-panel-terminal" class="dev-panel__body" role="tabpanel">
+              <pre id="dev-terminal-output" class="dev-terminal__output" aria-live="polite"></pre>
+              <div class="dev-terminal__prompt">
+                <span class="dev-terminal__sigil" aria-hidden="true">$</span>
+                <input
+                  id="dev-terminal-input"
+                  class="dev-terminal__input"
+                  type="text"
+                  placeholder="help, ls, cat README.md, node script.js…"
+                  autocomplete="off"
+                  spellcheck="false"
+                  aria-label="Commande du terminal"
+                />
+                <button id="dev-terminal-run" class="dev-terminal__run" type="button">Exécuter</button>
+              </div>
+              <p class="dev-terminal__hint">
+                Commandes autorisées : <span id="dev-terminal-commands">—</span>.
+                Le terminal est sans état et s’exécute à la racine du projet.
+              </p>
+            </div>
+
+            <div id="dev-panel-output" class="dev-panel__body" role="tabpanel" hidden>
+              <pre id="dev-run-output" class="dev-terminal__output">Aucune exécution.</pre>
+            </div>
+
+            <div id="dev-panel-preview" class="dev-panel__body dev-panel__body--preview" role="tabpanel" hidden>
+              <div id="dev-preview-empty" class="dev-preview__empty">
+                <strong>Aucun aperçu</strong>
+                <p>Ouvrez un fichier HTML, CSS ou JavaScript puis cliquez sur Aperçu.</p>
+              </div>
+              <iframe
+                id="dev-preview-frame"
+                class="dev-preview__frame"
+                title="Aperçu du code"
+                sandbox="allow-scripts allow-forms allow-modals"
+                hidden
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        Think-Browser Dev · Les fichiers sont lus et écrits uniquement dans
+        l’espace choisi. Les liens symboliques hors de cet espace sont refusés.
+      </footer>
+    </main>
+
+    <dialog id="dev-prompt-dialog" class="dev-prompt" aria-labelledby="dev-prompt-title">
+      <div class="dev-prompt__surface">
+        <h2 id="dev-prompt-title">Nom</h2>
+        <p id="dev-prompt-label" class="dev-prompt__label"></p>
+        <input id="dev-prompt-input" type="text" spellcheck="false" autocomplete="off" />
+        <p id="dev-prompt-error" class="dev-prompt__error" role="alert"></p>
+        <div class="dev-prompt__actions">
+          <button id="dev-prompt-cancel" class="btn btn--ghost" type="button">Annuler</button>
+          <button id="dev-prompt-ok" class="btn btn--primary" type="button">Valider</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="dev.js"></script>
+  </body>
+</html>

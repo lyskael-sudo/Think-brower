@@ -1,0 +1,258 @@
+/* --------------------------------------------------------------------------
+   Thèmes de l'interface hôte
+   --------------------------------------------------------------------------
+   Le thème par défaut reste défini dans main.css. Ce fichier ne contient que
+   les variantes et les quelques surfaces historiquement codées en dur.
+   -------------------------------------------------------------------------- */
+
+:root[data-theme="midnight"] {
+  color-scheme: dark;
+
+  --bg-deep: #06050d;
+  --bg: #0a0813;
+  --surface: #120f1d;
+  --surface-soft: #171326;
+  --surface-strong: #211a33;
+  --border: #332a4a;
+  --border-soft: rgba(196, 181, 253, 0.12);
+
+  --text: #f0ecff;
+  --text-muted: #b1a6cc;
+  --text-dim: #81759f;
+
+  --accent: #a78bfa;
+  --accent-strong: #c4b5fd;
+  --accent-soft: rgba(167, 139, 250, 0.14);
+  --success: #4ade9f;
+  --success-soft: rgba(74, 222, 159, 0.1);
+  --danger: #ff7a85;
+  --danger-soft: rgba(255, 122, 133, 0.12);
+}
+
+:root[data-theme="midnight"] body {
+  background:
+    radial-gradient(
+      900px 420px at 12% -8%,
+      rgba(139, 92, 246, 0.18),
+      transparent 62%
+    ),
+    var(--bg-deep);
+}
+
+:root[data-theme="midnight"] .toolbar {
+  background: linear-gradient(180deg, #151021 0%, #0e0b17 100%);
+}
+
+:root[data-theme="midnight"] .tabbar {
+  background: linear-gradient(180deg, #0b0813 0%, #08060e 100%);
+}
+
+:root[data-theme="midnight"] .tab {
+  background: rgba(29, 23, 45, 0.55);
+}
+
+:root[data-theme="midnight"] .tab:hover {
+  background: rgba(38, 30, 59, 0.78);
+}
+
+:root[data-theme="midnight"] .tab.is-active {
+  background: linear-gradient(180deg, #1d172e 0%, #151021 100%);
+}
+
+:root[data-theme="midnight"] .address-form {
+  background: rgba(8, 5, 16, 0.68);
+}
+
+:root[data-theme="midnight"] .address-form:focus-within {
+  background: rgba(10, 7, 20, 0.94);
+}
+
+:root[data-theme="midnight"] .menu-popover,
+:root[data-theme="midnight"] .find-bar,
+:root[data-theme="midnight"] .media-panel,
+:root[data-theme="midnight"] dialog.modal {
+  background: rgba(18, 15, 29, 0.98);
+}
+
+:root[data-theme="midnight"] .modal__footer {
+  background: rgba(5, 3, 10, 0.32);
+}
+
+:root[data-theme="midnight"] .toast {
+  background: rgba(24, 19, 38, 0.97);
+}
+
+/* --------------------------------------------------------------------------
+   Thème clair
+   -------------------------------------------------------------------------- */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-deep: #e8edf4;
+  --bg: #f3f6fa;
+  --surface: #ffffff;
+  --surface-soft: #eef2f7;
+  --surface-strong: #e2e8f1;
+  --border: #c8d3e1;
+  --border-soft: rgba(30, 41, 59, 0.13);
+
+  --text: #17202e;
+  --text-muted: #526174;
+  --text-dim: #7b8798;
+
+  --accent: #2f62d8;
+  --accent-strong: #1f4fc4;
+  --accent-soft: rgba(47, 98, 216, 0.1);
+  --success: #0b7a55;
+  --success-soft: rgba(11, 122, 85, 0.1);
+  --danger: #c13343;
+  --danger-soft: rgba(193, 51, 67, 0.1);
+}
+
+:root[data-theme="light"] body {
+  background:
+    radial-gradient(
+      900px 420px at 12% -8%,
+      rgba(47, 98, 216, 0.12),
+      transparent 62%
+    ),
+    var(--bg-deep);
+}
+
+:root[data-theme="light"] .toolbar {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 10px 26px rgba(30, 41, 59, 0.08);
+}
+
+:root[data-theme="light"] .tabbar,
+:root[data-theme="light"] .is-private .tabbar {
+  background: linear-gradient(180deg, #eef2f7 0%, #e6ecf4 100%);
+  border-bottom-color: rgba(30, 41, 59, 0.1);
+}
+
+:root[data-theme="light"] .tab {
+  background: rgba(255, 255, 255, 0.48);
+}
+
+:root[data-theme="light"] .tab:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+:root[data-theme="light"] .tab.is-active,
+:root[data-theme="light"] .is-private .tab.is-active {
+  background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+  border-color: var(--border);
+}
+
+:root[data-theme="light"] .address-form {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 1px 2px rgba(30, 41, 59, 0.08) inset;
+}
+
+:root[data-theme="light"] .address-form:focus-within {
+  background: #ffffff;
+  border-color: rgba(47, 98, 216, 0.62);
+  box-shadow:
+    0 0 0 3px rgba(47, 98, 216, 0.11),
+    0 1px 2px rgba(30, 41, 59, 0.08) inset;
+}
+
+:root[data-theme="light"] .address-form__clear {
+  background: rgba(30, 41, 59, 0.06);
+}
+
+:root[data-theme="light"] .address-form__clear:hover {
+  background: rgba(30, 41, 59, 0.12);
+}
+
+:root[data-theme="light"] .find-bar,
+:root[data-theme="light"] .menu-popover,
+:root[data-theme="light"] .media-panel,
+:root[data-theme="light"] dialog.modal {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(30, 41, 59, 0.16);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 24px 65px rgba(30, 41, 59, 0.2);
+}
+
+:root[data-theme="light"] .find-bar__input {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+:root[data-theme="light"] dialog.modal::backdrop {
+  background: rgba(30, 41, 59, 0.32);
+}
+
+:root[data-theme="light"] .modal__footer {
+  background: rgba(30, 41, 59, 0.04);
+}
+
+:root[data-theme="light"] .media-item,
+:root[data-theme="light"] .download-item,
+:root[data-theme="light"] .library-card {
+  background: rgba(238, 242, 247, 0.82);
+}
+
+:root[data-theme="light"] .media-item:hover,
+:root[data-theme="light"] .library-card:hover {
+  background: rgba(226, 232, 241, 0.9);
+}
+
+:root[data-theme="light"] .select,
+:root[data-theme="light"] .text-input,
+:root[data-theme="light"] .library-search__input,
+:root[data-theme="light"] .library-filter__select {
+  background: #ffffff;
+  color: var(--text);
+}
+
+:root[data-theme="light"] .settings-group {
+  background: rgba(238, 242, 247, 0.72);
+}
+
+:root[data-theme="light"] .setting-row__controls {
+  background: rgba(255, 255, 255, 0.66);
+}
+
+:root[data-theme="light"] .select:hover {
+  border-color: rgba(30, 41, 59, 0.28);
+}
+
+:root[data-theme="light"] .empty-state,
+:root[data-theme="light"] .library-empty {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+:root[data-theme="light"] .toast {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 16px 45px rgba(30, 41, 59, 0.18);
+}
+
+:root[data-theme="light"] .toast--success {
+  color: var(--success);
+}
+
+:root[data-theme="light"] .toast--error {
+  color: var(--danger);
+}
+
+:root[data-theme="light"] .download-status--queued {
+  color: #98610a;
+}
+
+:root[data-theme="light"] .media-panel__status.is-warning {
+  color: #98610a;
+}
+
+:root[data-theme="light"] .extensions-intro {
+  border-color: rgba(47, 98, 216, 0.2);
+}
+
+:root[data-theme="light"] .button--primary,
+:root[data-theme="light"] .go-button {
+  color: #ffffff;
+}

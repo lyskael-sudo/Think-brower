@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src 'self'; base-uri 'none'; form-action 'none';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>about:security — Think-Browser</title>
+    <link rel="stylesheet" href="pages.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand__mark" aria-hidden="true">T</span>
+          <span>
+            Think-Browser
+            <small>Diagnostic de sécurité</small>
+          </span>
+        </div>
+        <nav class="page-nav" aria-label="Pages internes">
+          <a href="think-page://config/">about:config</a>
+          <a href="think-page://security/" aria-current="page">about:security</a>
+          <a href="think-page://dev/">about:dev</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Cookies, permissions et signaux</p>
+          <h1>about:security</h1>
+          <p>
+            Vue locale des cookies de la session, des autorisations accordées
+            aux sites, des connexions non chiffrées et des protections
+            réellement actives. Les valeurs sensibles sont masquées par défaut.
+          </p>
+        </div>
+        <div id="security-pills" class="hero__meta" aria-label="État">
+          <span class="pill">Chargement…</span>
+        </div>
+      </section>
+
+      <p id="security-status" class="status" role="status" aria-live="polite"></p>
+
+      <section class="card card--wide" aria-labelledby="stats-title">
+        <div class="card__head">
+          <div>
+            <h2 id="stats-title">Instantané de la session</h2>
+            <p id="security-generated">—</p>
+          </div>
+          <button id="refresh-security" class="btn btn--small" type="button">
+            Actualiser
+          </button>
+        </div>
+        <div class="card__body">
+          <div class="stat-grid">
+            <div class="stat">
+              <strong id="stat-cookies">—</strong>
+              <span>Cookies</span>
+            </div>
+            <div class="stat">
+              <strong id="stat-permissions">—</strong>
+              <span>Sites autorisés</span>
+            </div>
+            <div class="stat">
+              <strong id="stat-cache">—</strong>
+              <span>Cache disque</span>
+            </div>
+            <div class="stat">
+              <strong id="stat-downloads">—</strong>
+              <span>Téléchargements</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid grid--spaced">
+        <section class="card card--wide" aria-labelledby="posture-title">
+          <div class="card__head">
+            <div>
+              <h2 id="posture-title">Posture de sécurité</h2>
+              <p>
+                Contrôles effectifs de l’application. Un avertissement n’est
+                pas nécessairement une faille : il indique une limite à
+                connaître.
+              </p>
+            </div>
+          </div>
+          <div class="card__body">
+            <ul id="posture-list" class="check-list"></ul>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="signals-title">
+          <div class="card__head">
+            <div>
+              <h2 id="signals-title">Signaux d’insécurité</h2>
+              <p>Éléments observés dans cette session.</p>
+            </div>
+          </div>
+          <div class="card__body stack">
+            <div>
+              <div class="toolbar-row">
+                <h3>Cookies à vérifier</h3>
+                <span id="cookie-issue-count" class="pill">—</span>
+              </div>
+              <ul id="cookie-issues" class="signal-list"></ul>
+            </div>
+            <div>
+              <div class="toolbar-row">
+                <h3>Permissions sensibles</h3>
+                <span id="permission-risk-count" class="pill">—</span>
+              </div>
+              <ul id="permission-risks" class="signal-list"></ul>
+            </div>
+            <div>
+              <div class="toolbar-row">
+                <h3>HTTP non chiffré</h3>
+                <span id="http-risk-count" class="pill">—</span>
+              </div>
+              <ul id="http-risks" class="signal-list"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="actions-title">
+          <div class="card__head">
+            <div>
+              <h2 id="actions-title">Nettoyage</h2>
+              <p>Actions immédiates sur cette session.</p>
+            </div>
+          </div>
+          <div class="card__body stack">
+            <div class="notice">
+              <strong>Portée.</strong> Les actions agissent sur la session qui
+              affiche cette page. Une fenêtre privée utilise une partition
+              éphémère séparée.
+            </div>
+            <div class="btn-row">
+              <button id="clear-cookies" class="btn btn--danger" type="button">
+                Supprimer les cookies
+              </button>
+              <button id="clear-data" class="btn btn--danger" type="button">
+                Effacer les données de navigation
+              </button>
+              <button id="reset-permissions" class="btn" type="button">
+                Réinitialiser les permissions
+              </button>
+              <button id="clear-history" class="btn" type="button">
+                Effacer l’historique
+              </button>
+            </div>
+            <p id="action-status" class="status" role="status"></p>
+            <dl class="kv">
+              <dt>Version</dt>
+              <dd id="security-version">—</dd>
+              <dt>Electron</dt>
+              <dd id="security-electron" class="mono">—</dd>
+              <dt>Chromium</dt>
+              <dd id="security-chrome" class="mono">—</dd>
+              <dt>Node.js</dt>
+              <dd id="security-node" class="mono">—</dd>
+            </dl>
+          </div>
+        </section>
+
+        <section class="card card--wide" aria-labelledby="cookies-title">
+          <div class="card__head">
+            <div>
+              <h2 id="cookies-title">Cookies de la session</h2>
+              <p>
+                Les valeurs sont masquées par défaut. La suppression cible le
+                cookie sélectionné et ne touche pas aux autres domaines.
+              </p>
+            </div>
+            <span id="cookies-count" class="pill">—</span>
+          </div>
+          <div class="card__body stack">
+            <div class="toolbar-row">
+              <input
+                id="cookie-filter"
+                type="search"
+                placeholder="Filtrer par domaine ou nom…"
+                aria-label="Filtrer les cookies"
+              />
+              <label class="check check--compact" for="reveal-cookies">
+                <input id="reveal-cookies" type="checkbox" />
+                <span class="check__text">
+                  <strong>Afficher les valeurs</strong>
+                </span>
+              </label>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Domaine</th>
+                    <th>Nom</th>
+                    <th>Valeur</th>
+                    <th>Secure</th>
+                    <th>HttpOnly</th>
+                    <th>SameSite</th>
+                    <th>Expiration</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="cookies-body"></tbody>
+              </table>
+            </div>
+            <p id="cookies-empty" class="empty" hidden>
+              Aucun cookie ne correspond au filtre.
+            </p>
+          </div>
+        </section>
+
+        <section class="card card--wide" aria-labelledby="downloads-title">
+          <div class="card__head">
+            <div>
+              <h2 id="downloads-title">Téléchargements récents</h2>
+              <p>Fichiers et flux enregistrés dans la session normale.</p>
+            </div>
+          </div>
+          <div class="card__body">
+            <ul id="security-downloads" class="signal-list"></ul>
+          </div>
+        </section>
+
+        <section class="card card--wide" aria-labelledby="notices-title">
+          <div class="card__head">
+            <div>
+              <h2 id="notices-title">Avis de sécurité et limites connues</h2>
+              <p>
+                Avis embarqués dans cette version, sans flux distant ni
+                télémétrie. Ils décrivent les risques résiduels et les
+                décisions d’architecture à vérifier avant distribution.
+              </p>
+            </div>
+            <span id="notices-version" class="pill">—</span>
+          </div>
+          <div class="card__body stack">
+            <ul id="security-notices" class="signal-list"></ul>
+            <div class="notice">
+              <strong>Limites fonctionnelles.</strong>
+              <ul id="security-limitations" class="plain-list"></ul>
+            </div>
+            <dl class="kv">
+              <dt>Mises à jour</dt>
+              <dd id="security-update-policy">—</dd>
+              <dt>Signalement</dt>
+              <dd id="security-report-policy">—</dd>
+              <dt>Télémétrie</dt>
+              <dd id="security-telemetry-policy">—</dd>
+            </dl>
+          </div>
+        </section>
+      </div>
+
+      <footer class="footer">
+        Think-Browser · Les données affichées restent dans cette page locale.
+        Aucun cookie n’est envoyé à un service distant.
+      </footer>
+    </main>
+
+    <script src="security.js"></script>
+  </body>
+</html>
